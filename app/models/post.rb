@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
     CLICKBAIT_PATTERNS = [
       /Won't Believe/i,
       /Secret/i,
-      /Top [0-9]*/i,
+      /Top [0-9]*/i,  # Include "Top" plus any possible number
       /Guess/i
     ]
   
@@ -17,4 +17,6 @@ class Post < ActiveRecord::Base
         errors.add(:title, "must be clickbait")
       end
     end
+    # none? = each pattern is evaluated against title to find a match
+    # If the .none? method returns true, that means that the title is missing its clickbait appeal and will generate an error: “must be clickbait”
 end
